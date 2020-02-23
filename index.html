@@ -24,103 +24,112 @@
       var missiles = [];
 
       var enemies = [
-          {left: 200, top: 100},
-          {left: 300, top: 100},
-          {left: 400, top: 100},
-          {left: 500, top: 100},
-          {left: 600, top: 100},
-          {left: 700, top: 100},
-          {left: 800, top: 100},
-          {left: 900, top: 100},
-          {left: 200, top: 175},
-          {left: 300, top: 175},
-          {left: 400, top: 175},
-          {left: 500, top: 175},
-          {left: 600, top: 175},
-          {left: 700, top: 175},
-          {left: 800, top: 175},
-          {left: 900, top: 175},
+        { left: 200, top: 100 },
+        { left: 300, top: 100 },
+        { left: 400, top: 100 },
+        { left: 500, top: 100 },
+        { left: 600, top: 100 },
+        { left: 700, top: 100 },
+        { left: 800, top: 100 },
+        { left: 900, top: 100 },
+        { left: 200, top: 175 },
+        { left: 300, top: 175 },
+        { left: 400, top: 175 },
+        { left: 500, top: 175 },
+        { left: 600, top: 175 },
+        { left: 700, top: 175 },
+        { left: 800, top: 175 },
+        { left: 900, top: 175 }
       ];
 
-      document.onkeydown = function(e) {  //arrow functionality
-        if (e.keyCode === 37) { //the number 37 represent the keys on the keyboard to move the hero to the left
+      document.onkeydown = function(e) {
+        //arrow functionality
+        if (e.keyCode === 37) {
+          //the number 37 represent the keys on the keyboard to move the hero to the left
           console.log("LEFT");
           hero.left = hero.left - 10; //valuating hero.left to be equal to 550
           moveHero();
-        } else if (e.keyCode === 39) { //the number 37 represent the keys on the keyboard to move the hero to the right
+        } else if (e.keyCode === 39) {
+          //the number 37 represent the keys on the keyboard to move the hero to the right
           console.log("RIGHT");
           hero.left = hero.left + 10;
           moveHero();
         } else if (e.keyCode === 32) {
           console.log("FIRE ");
-          missiles.push({  //push into the array (add)
-              left: hero.left + 15,
-              top: hero.top
-          })
-         drawMissiles()
+          missiles.push({
+            //push into the array (add)
+            left: hero.left + 15,
+            top: hero.top
+          });
+          drawMissiles();
         }
-      }
+      };
 
       function moveHero() {
         document.getElementById("hero").style.left = hero.left + "px";
       }
-      function drawMissiles(){
-          document.getElementById("missiles").innerHTML = ""; //will clear out the divison 
-        for(var missile = 0; missile < missiles.length; missile = missile + 1){
-            document.getElementById("missiles").innerHTML += 
-            `<div class='missile' style='left:${missiles[missile].left}px; top:${missiles[missile].top}px;'></div>`; //what += basically means is to add to the division (div)
+      function drawMissiles() {
+        document.getElementById("missiles").innerHTML = ""; //will clear out the divison
+        for (
+          var missile = 0;
+          missile < missiles.length;
+          missile = missile + 1
+        ) {
+          document.getElementById(
+            "missiles"
+          ).innerHTML += `<div class='missile' style='left:${missiles[missile].left}px; top:${missiles[missile].top}px;'></div>`; //what += basically means is to add to the division (div)
         }
       }
-      function moveMissiles(){
-        for(var missile = 0; missile < missiles.length; missile = missile + 1){
-            missiles[missile].top = missiles[missile].top - 5;
-      }
-    }
-    function drawEnemies(){
-        document.getElementById("enemies").innerHTML = ""; //will clear out the divison 
-        for(var enemy = 0; enemy < enemies.length; enemy = enemy + 1){
-            document.getElementById("enemies").innerHTML += 
-            `<div class='enemy' style='left:${enemies[enemy].left}px; top:${enemies[enemy].top}px;'></div>`; //what += basically means is to add to the division (div)
+      function moveMissiles() {
+        for (
+          var missile = 0;
+          missile < missiles.length;
+          missile = missile + 1
+        ) {
+          missiles[missile].top = missiles[missile].top - 5;
         }
-    }
-    function moveEnemies(){
-        for(var i = 0 ; i < enemies.length ; i++){
-            enemies[i].top = enemies[i].top + 1;;
       }
-    }
-    function collisonDetection(){
-        for(var enemy = 0; enemy < enemies.length; enemy ++){
-            for(var missile = 0; missile < missiles.length; missile ++){
-                if(
-                    (missiles[missile].top <= enemies[enemy].top + 50) &&
-                    (missiles[missile].top >= enemies[enemy].top) &&
-                    (missiles[missile].top >= enemies[enemy].left) &&
-                    (missiles[missile].top <= enemies[enemy].left + 50)
-                ){
-                   enemies.splice(enemy, 1);
-                   missiles.splice(missile, 1);
-                }
+      function drawEnemies() {
+        document.getElementById("enemies").innerHTML = ""; //will clear out the divison
+        for (var enemy = 0; enemy < enemies.length; enemy = enemy + 1) {
+          document.getElementById(
+            "enemies"
+          ).innerHTML += `<div class='enemy' style='left:${enemies[enemy].left}px; top:${enemies[enemy].top}px;'></div>`; //what += basically means is to add to the division (div)
+        }
+      }
+      function moveEnemies() {
+        for (var i = 0; i < enemies.length; i++) {
+          enemies[i].top = enemies[i].top + 1;
+        }
+      }
+      function collisonDetection() {
+        for (var enemy = 0; enemy < enemies.length; enemy++) {
+          for (var missile = 0; missile < missiles.length; missile++) {
+            if (
+              missiles[missile].left >= enemies[enemy].left &&
+              missiles[missile].left <= enemies[enemy].left + 50 &&
+              missiles[missile].top <= enemies[enemy].top + 50 &&
+              missiles[missile].top >= enemies[enemy].top
+            ) {
+              enemies.splice(enemy, 1);
+              missiles.splice(missile, 1);
             }
+          }
         }
-    }
+      }
 
-    function endGame(){
-        
-    }
-      function gameLoop(){
-        setTimeout(gameLoop, 50)
+      function gameLoop() {
+        setTimeout(gameLoop, 50);
         moveMissiles();
         drawMissiles();
         moveEnemies();
         drawEnemies();
-        collisonDetection()
+        collisonDetection();
       }
       gameLoop();
-
-
-    //move hero/top down
-    //move enemies left/right/ as they move down
-    //add score
+      //move hero/top down
+      //move enemies left/right/ as they move down
+      //add score
     </script>
   </body>
 </html>
