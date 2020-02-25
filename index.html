@@ -18,11 +18,6 @@
     <canvas id="game-canvas" width="640" height="640"></canvas>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-      /* Simple JavaScript Inheritance
-       * By John Resig http://ejohn.org/
-       * MIT Licensed.
-       */
-      // Inspired by base2 and Prototype
       (function() {
         var initializing = false,
           fnTest = /xyz/.test(function() {
@@ -34,7 +29,7 @@
         // The base Class implementation (does nothing)
         this.Class = function() {};
 
-        // Create a new Class that inherits from this class
+        // Create a new Class that inherits fr om this class
         Class.extend = function(prop) {
           var _super = this.prototype;
 
@@ -128,7 +123,6 @@
       var LEFT_KEY = 37;
       var RIGHT_KEY = 39;
       var SHOOT_KEY = 38;
-      var PAUSE = 80;
       var TEXT_BLINK_FREQ = 500;
       var PLAYER_CLIP_RECT = { x: 0, y: 204, w: 62, h: 32 };
       var ALIEN_BOTTOM_ROW = [
@@ -225,9 +219,6 @@
       var alienCount = 0;
       var wave = 1;
       var hasGameStarted = false; 
-      var paused = false;
-
-
       // ###################################################################
       // Entities
       //
@@ -350,7 +341,6 @@
           } else if (isKeyDown(RIGHT_KEY)) {
             this.xVel = 175;
           } else this.xVel = 0;
-
           if (wasKeyPressed(SHOOT_KEY)) {
             if (this.bulletDelayAccumulator > 0.5) {
               this.shoot();
@@ -358,7 +348,7 @@
             }
           }
         },
-
+        
 
         updateBullets: function(dt) {
           for (var i = this.bullets.length - 1; i >= 0; i--) {
@@ -949,29 +939,29 @@
     //########################################################
     // PAUSE GAME
     //#########################################################
-    var gameBrightness = 10; 
+//     var gameBrightness = 10; 
 
-    function pause() {
-    var pause = swal("You paused the game, click 'OK' to continue your game and the other button to go to options"); 
+//     function pause() {
+//     var pause = swal("You paused the game, click 'OK' to continue your game and the other button to go to options"); 
       
-    if (pause == false) { //Didn't click on OK
-      var options = confirm("Click on 'Ok' to not change brigthness, but the other one to change the brightness to a random value");
+//     if (pause == false) { //Didn't click on OK
+//       var options = confirm("Click on 'Ok' to not change brigthness, but the other one to change the brightness to a random value");
       
-      if (options == true) { //Clicked on OK
-         ReDopause();
-         return;
-      }
-      else { //Didn't click on OK
-         brightness = Math.floor(Math.random() * 20);
-         document.getElementById("brightness").innerHTML = brightness;
-         ReDopause();
-         return;
-      }
-    }
- }
- var ReDopause = function() {
-    pause(); 
- }
+//       if (options == true) { //Clicked on OK
+//          ReDopause();
+//          return;
+//       }
+//       else { //Didn't click on OK
+//          brightness = Math.floor(Math.random() * 20);
+//          document.getElementById("brightness").innerHTML = brightness;
+//          ReDopause();
+//          return;
+//       }
+//     }
+//  }
+//  var ReDopause = function() {
+//     pause(); 
+//  }
 
     </script>
   </body>
