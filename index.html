@@ -43,6 +43,7 @@
       ];
 
       document.onkeydown = function(e) {
+        if(!paused){}
         //arrow functionality
         if (e.keyCode === 37) {
           //the number 37 represent the keys on the keyboard to move the hero to the left
@@ -119,6 +120,13 @@
       }
 
       function gameLoop() {
+        var pauseed = false;
+        function gameLoop(){
+          if (paused){
+            setTimeout(gameLoop, 5)
+            return;
+          }
+        }
         setTimeout(gameLoop, 50);
         moveMissiles();
         drawMissiles();
